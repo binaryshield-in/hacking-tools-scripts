@@ -1,0 +1,14 @@
+# Robots.txt for BinaryShield Tools & Scripts
+# Controls how search engines crawl and index the site
+
+# Allow all search engines
+User-agent: *
+Allow: /
+
+# Disallow sensitive or non-public directories (customize if needed)
+Disallow: /private/
+Disallow: /config/
+Disallow: /scripts/
+
+# Sitemap location
+Sitemap: https://hacking-tools-scripts.binaryshield.in/sitemap.xml
