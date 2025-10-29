@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Home -->
+  <url>
+    <loc>https://hacking-tools-scripts.binaryshield.in/</loc>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Tools & Scripts Main Page -->
+  <url>
+    <loc>https://hacking-tools-scripts.binaryshield.in/tools</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Individual Tool Pages (update if you create separate pages later) -->
+  <url>
+    <loc>https://hacking-tools-scripts.binaryshield.in/#basic-clickjacking-html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hacking-tools-scripts.binaryshield.in/#basic-clickjacking-python</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hacking-tools-scripts.binaryshield.in/#advanced-clickjacking-python</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hacking-tools-scripts.binaryshield.in/#encryption-utility</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hacking-tools-scripts.binaryshield.in/#log-analyzer</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hacking-tools-scripts.binaryshield.in/#phishing-detector</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Contact Page -->
+  <url>
+    <loc>https://hacking-tools-scripts.binaryshield.in/contact</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Privacy Policy -->
+  <url>
+    <loc>https://hacking-tools-scripts.binaryshield.in/privacy-policy</loc>
+    <priority>0.4</priority>
+  </url>
+
+</urlset>

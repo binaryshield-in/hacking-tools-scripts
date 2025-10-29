@@ -1,0 +1,488 @@
+/* ========================================
+   BinaryShield - Tools & Scripts CSS
+   Updated: Smaller boxes with image overlay
+   ======================================== */
+
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background-color: #000000;
+    color: #ffffff;
+    min-height: 100vh;
+}
+
+/* ========================================
+   Header Styles
+   ======================================== */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #1a1a1a;
+    box-shadow: 0 2px 10px rgba(255, 0, 0, 0.3);
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 700;
+    color: #ff0000;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.logo:hover {
+    color: #00ff88;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Search Bar */
+.search-bar {
+    position: relative;
+}
+
+.search-bar input {
+    padding: 10px 15px;
+    background-color: #2e2e2e;
+    border: 2px solid #ff0000;
+    border-radius: 25px;
+    color: #ffffff;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 14px;
+    width: 250px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.search-bar input:focus {
+    border-color: #00ff88;
+}
+
+.search-bar input::placeholder {
+    color: #888;
+}
+
+/* Back Button */
+.back-btn {
+    padding: 10px 25px;
+    background-color: #ff0000;
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.back-btn:hover {
+    background-color: #00ff88;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 255, 136, 0.4);
+}
+
+/* ========================================
+   Main Content
+   ======================================== */
+main {
+    padding: 60px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 42px;
+    font-weight: 700;
+    color: #ff0000;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* ========================================
+   Tools Grid - Smaller boxes
+   ======================================== */
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+/* Tool Box - Compact with Overlay */
+.tool-box {
+    background-color: #2e2e2e;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.2);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    cursor: pointer;
+    height: 280px;
+}
+
+.tool-box:hover {
+    transform: scale(1.03) translateY(-8px);
+    box-shadow: 0 12px 35px rgba(255, 0, 0, 0.5);
+}
+
+/* Image as Background Overlay */
+.tool-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    opacity: 0.3;
+    transition: opacity 0.4s ease;
+}
+
+.tool-box:hover .tool-image {
+    opacity: 0.15;
+}
+
+/* Content Overlay on Image */
+.tool-content {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.85) 100%);
+}
+
+.tool-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ff0000;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.tool-description {
+    font-size: 12px;
+    color: #00ff88;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    flex-grow: 1;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
+}
+
+/* ========================================
+   Hover Actions
+   ======================================== */
+.tool-actions {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: all 0.4s ease;
+    pointer-events: none;
+}
+
+.tool-box:hover .tool-actions {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+.download-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #ff0000;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(255, 0, 0, 0.4);
+}
+
+.download-btn:hover {
+    background-color: #cc0000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.6);
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.youtube-icon {
+    background-color: #ff0000;
+    color: #ffffff;
+}
+
+.youtube-icon:hover {
+    background-color: #cc0000;
+    transform: scale(1.15) rotate(5deg);
+}
+
+.medium-icon {
+    background-color: #00ff88;
+    color: #000000;
+}
+
+.medium-icon:hover {
+    background-color: #00cc6e;
+    transform: scale(1.15) rotate(-5deg);
+}
+
+/* No Results Message */
+.no-results {
+    text-align: center;
+    color: #ff0000;
+    font-size: 20px;
+    padding: 60px 20px;
+    display: none;
+}
+
+/* ========================================
+   Footer Styles
+   ======================================== */
+footer {
+    background-color: #1a1a1a;
+    border-top: 2px solid #ff0000;
+    padding: 40px 20px 20px;
+    margin-top: 60px;
+}
+
+.footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    padding: 0 20px;
+}
+
+.footer-section h3 {
+    color: #ff0000;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.footer-section p,
+.footer-section a {
+    color: #00ff88;
+    font-size: 14px;
+    line-height: 1.8;
+    text-decoration: none;
+    display: block;
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: #ff0000;
+    padding-left: 5px;
+}
+
+.footer-social {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.footer-social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background-color: #2e2e2e;
+    border-radius: 50%;
+    color: #ffffff;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.footer-social a:hover {
+    background-color: #ff0000;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #2e2e2e;
+    color: #888;
+    font-size: 14px;
+}
+
+.footer-bottom a {
+    color: #ff0000;
+    text-decoration: none;
+    display: inline;
+}
+
+.footer-bottom a:hover {
+    color: #00ff88;
+    text-decoration: underline;
+}
+
+/* ========================================
+   Responsive Design
+   ======================================== */
+
+/* Large Tablets */
+@media (max-width: 1024px) {
+    .tools-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    
+    .tool-box {
+        height: 260px;
+    }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+    header {
+        padding: 15px 20px;
+    }
+
+    .logo {
+        font-size: 24px;
+    }
+
+    .header-right {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .search-bar input {
+        width: 100%;
+        max-width: 200px;
+    }
+
+    main {
+        padding: 40px 20px;
+    }
+
+    .page-title {
+        font-size: 32px;
+        margin-bottom: 30px;
+    }
+
+    .tools-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+    }
+    
+    .tool-box {
+        height: 240px;
+    }
+    
+    .tool-title {
+        font-size: 18px;
+    }
+    
+    .tool-description {
+        font-size: 11px;
+        -webkit-line-clamp: 3;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    footer {
+        padding: 30px 15px 15px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .logo {
+        font-size: 20px;
+    }
+
+    .search-bar input {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+
+    .back-btn {
+        font-size: 12px;
+        padding: 8px 15px;
+    }
+
+    .page-title {
+        font-size: 26px;
+    }
+    
+    .tools-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .tool-box {
+        height: 220px;
+    }
+    
+    .tool-title {
+        font-size: 17px;
+    }
+    
+    .tool-description {
+        font-size: 11px;
+        -webkit-line-clamp: 3;
+    }
+    
+    .social-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+    }
+}
