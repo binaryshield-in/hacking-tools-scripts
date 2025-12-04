@@ -1,5 +1,6 @@
 # BinaryShield - Tools & Scripts
-
+# @ created by sanjai
+## @ contact sanjai@binaryshield.in
 This repository hosts the **BinaryShield Tools & Scripts** portal — a lightweight and responsive frontend for showcasing cybersecurity tools, scripts, and resources.  
 The project is designed using **HTML, CSS, and JavaScript** with no external dependencies beyond Google Fonts.
 
@@ -15,6 +16,17 @@ The project is designed using **HTML, CSS, and JavaScript** with no external dep
 
 ---
 
----
+## 🛠️ Setup & Usage
 
-https://binaryshield.in
+1. Clone or download the repository:
+   ```bash
+   git clone https://github.com/your-username/binaryshield-tools.git
+   ```
+
+2. Open `index.html` in a browser, or serve the folder with a simple static server:
+   - Python 3: `python -m http.server 8000`
+   - Node (serve): `npx serve .`
+
+3. Browse to `http://localhost:8000` (or the port you chose).
+
+More details and credits: https://binaryshield.in
