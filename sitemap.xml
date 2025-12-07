@@ -1,60 +1,167 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
-  <!-- Home -->
+  <!-- Home Page -->
   <url>
     <loc>https://hacking-tools-scripts.binaryshield.in/</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- Tools & Scripts Main Page -->
+  <!-- Individual Tool Pages with Anchors -->
+  
+  <!-- Advanced Clickjacking Python -->
   <url>
-    <loc>https://hacking-tools-scripts.binaryshield.in/tools</loc>
+    <loc>https://hacking-tools-scripts.binaryshield.in/#advanced-clickjacking</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
-  <!-- Individual Tool Anchors -->
+  <!-- CORS Misconfiguration Validator -->
+  <url>
+    <loc>https://hacking-tools-scripts.binaryshield.in/#cors-validator</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- CRLF Injection Analysis Module -->
+  <url>
+    <loc>https://hacking-tools-scripts.binaryshield.in/#crlf-injection</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Host Header Injection Detector -->
+  <url>
+    <loc>https://hacking-tools-scripts.binaryshield.in/#host-header-injection</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- SSRF Surface Discovery Scanner -->
+  <url>
+    <loc>https://hacking-tools-scripts.binaryshield.in/#ssrf-scanner</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- IDOR Enumerator -->
+  <url>
+    <loc>https://hacking-tools-scripts.binaryshield.in/#idor-enumerator</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Open Redirect Detector -->
+  <url>
+    <loc>https://hacking-tools-scripts.binaryshield.in/#open-redirect</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- JWT Weakness Auditor -->
+  <url>
+    <loc>https://hacking-tools-scripts.binaryshield.in/#jwt-auditor</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- File Upload Security Validator -->
+  <url>
+    <loc>https://hacking-tools-scripts.binaryshield.in/#file-upload-validator</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- HTTP Parameter Pollution Detector -->
+  <url>
+    <loc>https://hacking-tools-scripts.binaryshield.in/#hpp-detector</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Basic Clickjacking HTML -->
   <url>
     <loc>https://hacking-tools-scripts.binaryshield.in/#basic-clickjacking-html</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
+  <!-- Basic Clickjacking Python -->
   <url>
-    <loc>https://hacking-tools-scripts.binaryshield.in/#password-cracker</loc>
+    <loc>https://hacking-tools-scripts.binaryshield.in/#basic-clickjacking-python</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
+  <!-- CSP Configuration Gap Scanner -->
   <url>
-    <loc>https://hacking-tools-scripts.binaryshield.in/#sql-injection-tester</loc>
-    <priority>0.8</priority>
+    <loc>https://hacking-tools-scripts.binaryshield.in/#csp-scanner</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
 
+  <!-- Rate Limiting Stress Validator -->
   <url>
-    <loc>https://hacking-tools-scripts.binaryshield.in/#encryption-utility</loc>
-    <priority>0.8</priority>
+    <loc>https://hacking-tools-scripts.binaryshield.in/#rate-limiting</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
 
+  <!-- HTTP Request Smuggling Analyzer -->
   <url>
-    <loc>https://hacking-tools-scripts.binaryshield.in/#log-analyzer</loc>
-    <priority>0.8</priority>
+    <loc>https://hacking-tools-scripts.binaryshield.in/#http-smuggling</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
 
+  <!-- Web Cache Poisoning Surface Analyzer -->
   <url>
-    <loc>https://hacking-tools-scripts.binaryshield.in/#phishing-detector</loc>
-    <priority>0.8</priority>
+    <loc>https://hacking-tools-scripts.binaryshield.in/#cache-poisoning</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
 
-  <!-- Contact Page -->
+  <!-- GraphQL Introspection Tool -->
   <url>
-    <loc>https://hacking-tools-scripts.binaryshield.in/contact</loc>
-    <priority>0.6</priority>
+    <loc>https://hacking-tools-scripts.binaryshield.in/#graphql-tool</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
 
   <!-- Privacy Policy -->
   <url>
     <loc>https://hacking-tools-scripts.binaryshield.in/privacy-policy</loc>
-    <priority>0.4</priority>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- Terms of Service -->
+  <url>
+    <loc>https://hacking-tools-scripts.binaryshield.in/terms</loc>
+    <lastmod>2025-01-07</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
 
 </urlset>
-

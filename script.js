@@ -1,6 +1,6 @@
 // ========================================
-// BinaryShield - Tools & Scripts JavaScript
-// Features: Search, Pagination, Dynamic Tool Loading
+// BinaryShield - Enhanced Tools & Scripts JavaScript
+// Features: Search (Title + Description), Pagination, Share Functionality
 // ========================================
 
 // Configuration
@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeTools();
     createPaginationControls();
     setupSearchListener();
+    setupShareModal();
     displayPage(currentPage);
 });
 
@@ -28,6 +29,7 @@ function initializeTools() {
     allTools = Array.from(toolBoxes).map(box => ({
         element: box,
         title: box.getAttribute('data-title').toLowerCase(),
+        description: box.getAttribute('data-description').toLowerCase(),
         html: box.outerHTML
     }));
     filteredTools = [...allTools];
@@ -61,6 +63,9 @@ function displayPage(pageNumber) {
         });
         toolsGrid.style.display = 'grid';
         noResults.style.display = 'none';
+        
+        // Re-attach share button listeners after adding HTML
+        attachShareListeners();
     } else {
         toolsGrid.style.display = 'none';
         noResults.style.display = 'block';
@@ -136,8 +141,6 @@ function updatePagination() {
         if (currentPage < totalPages) displayPage(currentPage + 1);
     });
     paginationContainer.appendChild(nextBtn);
-    
-    // Page info removed per request (no "Page X of Y" display)
 }
 
 // Create pagination button
@@ -184,7 +187,7 @@ function setupSearchListener() {
     });
 }
 
-// Perform search
+// Perform search - Now searches BOTH title AND description
 function performSearch(searchTerm) {
     const term = searchTerm.toLowerCase().trim();
     
@@ -192,8 +195,10 @@ function performSearch(searchTerm) {
         // Show all tools
         filteredTools = [...allTools];
     } else {
-        // Filter tools
-        filteredTools = allTools.filter(tool => tool.title.includes(term));
+        // Filter tools by title OR description
+        filteredTools = allTools.filter(tool => 
+            tool.title.includes(term) || tool.description.includes(term)
+        );
     }
     
     // Reset to first page and display
@@ -201,9 +206,165 @@ function performSearch(searchTerm) {
     displayPage(1);
 }
 
-// Add CSS for pagination (inject into page)
-const paginationStyles = document.createElement('style');
-paginationStyles.textContent = `
+// ========================================
+// Share Functionality
+// ========================================
+
+let currentShareData = {};
+
+function setupShareModal() {
+    const modal = document.getElementById('shareModal');
+    const closeBtn = modal.querySelector('.share-modal-close');
+    
+    // Close modal on X button
+    closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden', 'true');
+    });
+    
+    // Close modal on outside click
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
+        }
+    });
+    
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.style.display === 'flex') {
+            modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
+        }
+    });
+    
+    // Share option handlers
+    const shareOptions = modal.querySelectorAll('.share-option');
+    shareOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            const platform = this.getAttribute('data-platform');
+            handleShare(platform);
+        });
+    });
+}
+
+function attachShareListeners() {
+    const shareButtons = document.querySelectorAll('.share-btn');
+    shareButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const toolName = this.getAttribute('data-tool');
+            const toolUrl = this.getAttribute('data-url');
+            openShareModal(toolName, toolUrl);
+        });
+    });
+}
+
+function openShareModal(toolName, toolUrl) {
+    const modal = document.getElementById('shareModal');
+    const toolNameElement = document.getElementById('shareToolName');
+    
+    currentShareData = {
+        title: `${toolName} - BinaryShield Free Security Tool`,
+        url: toolUrl,
+        text: `Check out ${toolName} - a free ethical hacking tool from BinaryShield`
+    };
+    
+    toolNameElement.textContent = toolName;
+    modal.style.display = 'flex';
+    modal.setAttribute('aria-hidden', 'false');
+}
+
+function handleShare(platform) {
+    const { title, url, text } = currentShareData;
+    const encodedUrl = encodeURIComponent(url);
+    const encodedTitle = encodeURIComponent(title);
+    const encodedText = encodeURIComponent(text);
+    
+    let shareUrl;
+    
+    switch(platform) {
+        case 'twitter':
+            shareUrl = `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`;
+            break;
+        case 'facebook':
+            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+            break;
+        case 'linkedin':
+            shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
+            break;
+        case 'whatsapp':
+            shareUrl = `https://wa.me/?text=${encodedText}%20${encodedUrl}`;
+            break;
+        case 'copy':
+            copyToClipboard(url);
+            return;
+    }
+    
+    if (shareUrl) {
+        window.open(shareUrl, '_blank', 'width=600,height=400');
+    }
+    
+    // Close modal
+    document.getElementById('shareModal').style.display = 'none';
+}
+
+function copyToClipboard(text) {
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => {
+            showCopyNotification('Link copied to clipboard!');
+        }).catch(() => {
+            fallbackCopyToClipboard(text);
+        });
+    } else {
+        fallbackCopyToClipboard(text);
+    }
+}
+
+function fallbackCopyToClipboard(text) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    
+    try {
+        document.execCommand('copy');
+        showCopyNotification('Link copied to clipboard!');
+    } catch (err) {
+        showCopyNotification('Failed to copy link');
+    }
+    
+    document.body.removeChild(textArea);
+}
+
+function showCopyNotification(message) {
+    const notification = document.createElement('div');
+    notification.className = 'copy-notification';
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 10);
+    
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 2000);
+}
+
+// ========================================
+// Add CSS for Pagination and Share Modal
+// ========================================
+
+const styles = document.createElement('style');
+styles.textContent = `
+    /* Pagination Styles */
     .pagination-container {
         display: flex;
         justify-content: center;
@@ -279,17 +440,156 @@ paginationStyles.textContent = `
         font-weight: bold;
     }
 
-    // .page-info {
-    //     color: #00ff88;
-    //     font-size: 14px;
-    //     font-weight: 600;
-    //     margin-left: 15px;
-    //     padding: 8px 15px;
-    //     background-color: #1a1a1a;
-    //     border-radius: 8px;
-    //     border: 1px solid #00ff88;
-    // }
+    /* Share Button Styles */
+    .share-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background-color: #00ff88;
+        color: #000000;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
 
+    .share-btn:hover {
+        background-color: #00cc6e;
+        transform: scale(1.15) rotate(-5deg);
+    }
+
+    /* Share Modal Styles */
+    .share-modal {
+        display: none;
+        position: fixed;
+        z-index: 10000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+        animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .share-modal-content {
+        background-color: #2e2e2e;
+        padding: 30px;
+        border-radius: 15px;
+        max-width: 500px;
+        width: 90%;
+        position: relative;
+        animation: slideUp 0.3s ease;
+        box-shadow: 0 10px 40px rgba(255, 0, 0, 0.5);
+    }
+
+    @keyframes slideUp {
+        from {
+            transform: translateY(50px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .share-modal-close {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 32px;
+        font-weight: bold;
+        color: #ff0000;
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+
+    .share-modal-close:hover {
+        color: #00ff88;
+    }
+
+    .share-modal-content h3 {
+        color: #ff0000;
+        font-size: 24px;
+        margin-bottom: 10px;
+        font-weight: 700;
+    }
+
+    .share-modal-content p {
+        color: #00ff88;
+        margin-bottom: 25px;
+        font-size: 16px;
+    }
+
+    .share-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .share-option {
+        padding: 15px;
+        background-color: #1a1a1a;
+        color: #ffffff;
+        border: 2px solid #ff0000;
+        border-radius: 10px;
+        font-family: 'Poppins', Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .share-option:hover {
+        background-color: #ff0000;
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
+    }
+
+    .share-option span {
+        font-size: 20px;
+    }
+
+    /* Copy Notification */
+    .copy-notification {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%) translateY(100px);
+        background-color: #00ff88;
+        color: #000000;
+        padding: 15px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        box-shadow: 0 5px 20px rgba(0, 255, 136, 0.5);
+        z-index: 10001;
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+
+    .copy-notification.show {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+
+    /* Responsive Styles */
     @media (max-width: 768px) {
         .pagination-container {
             gap: 8px;
@@ -307,11 +607,12 @@ paginationStyles.textContent = `
             min-width: 35px;
         }
 
-        .page-info {
-            width: 100%;
-            text-align: center;
-            margin-left: 0;
-            margin-top: 10px;
+        .share-modal-content {
+            padding: 25px;
+        }
+
+        .share-buttons {
+            grid-template-columns: 1fr;
         }
     }
 
@@ -330,33 +631,31 @@ paginationStyles.textContent = `
         .page-numbers {
             gap: 3px;
         }
+
+        .share-modal-content h3 {
+            font-size: 20px;
+        }
     }
 `;
-document.head.appendChild(paginationStyles);
+document.head.appendChild(styles);
 
 // Ensure all download buttons behave like local downloads
-// - For same-origin (relative) URLs: add `download` attribute and remove `target`.
-// - For cross-origin URLs: try to fetch the resource and download as a blob; if that fails, open in a new tab as a fallback.
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('a.download-btn').forEach(anchor => {
-        // normalize href
         let href = anchor.getAttribute('href');
-        if (!href) return;
+        if (!href || href === '#') return;
 
         try {
             const url = new URL(href, location.href);
 
             if (url.origin === location.origin) {
-                // same-origin: set download attribute (derive filename) and remove target
                 const parts = url.pathname.split('/').filter(Boolean);
                 const filename = parts.length ? parts[parts.length - 1] : 'download';
                 anchor.setAttribute('download', filename);
                 anchor.removeAttribute('target');
             } else {
-                // cross-origin: add safety rel and attach click handler to attempt fetch->download
                 anchor.setAttribute('rel', 'noopener noreferrer');
                 anchor.addEventListener('click', async (e) => {
-                    // try to fetch and download as blob
                     e.preventDefault();
                     try {
                         const resp = await fetch(anchor.href, { mode: 'cors' });
@@ -372,7 +671,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         tmp.remove();
                         URL.revokeObjectURL(blobUrl);
                     } catch (err) {
-                        // fallback: open in new tab
                         window.open(anchor.href, '_blank', 'noopener noreferrer');
                     }
                 });

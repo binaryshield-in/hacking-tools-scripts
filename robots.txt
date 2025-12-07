@@ -1,14 +1,46 @@
 # Robots.txt for BinaryShield Tools & Scripts
-# Controls how search engines crawl and index the site
+# Optimized for Search Engine Crawling
 
-# Allow all search engines
+# Allow all search engines to crawl the site
 User-agent: *
 Allow: /
+Allow: /img/
+Allow: /scripts/
 
-# Disallow sensitive or non-public directories (customize if needed)
-Disallow: /private/
+# Disallow sensitive directories
 Disallow: /config/
-Disallow: /scripts/
+Disallow: /private/
+Disallow: /*.log$
 
-# Sitemap location
+# Specific rules for Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Specific rules for Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
+
+# Allow Google Image Bot
+User-agent: Googlebot-Image
+Allow: /img/
+
+# Block bad bots and scrapers
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Sitemap location (IMPORTANT FOR SEO)
 Sitemap: https://hacking-tools-scripts.binaryshield.in/sitemap.xml
+
+# Crawl delay for general bots (0 = no delay, recommended for good bots)
+Crawl-delay: 0
